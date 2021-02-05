@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gunpla_info/postingscreen.dart';
 import 'package:http/http.dart' as http;
 
+
+
 class FeedScreen extends StatefulWidget {
   @override
   _FeedScreenState createState() => _FeedScreenState();
@@ -28,6 +30,16 @@ class _FeedScreenState extends State<FeedScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('GUNPLA.INFO'),
+          actions: <Widget>[
+            Flexible(child:
+              IconButton(
+                icon:Icon(Icons.cached), 
+                onPressed:(){
+                  _loadPost();
+                } 
+              )
+            )
+          ],
         ),
         body: new Column(
           children: [
@@ -108,6 +120,8 @@ class _FeedScreenState extends State<FeedScreen> {
                   ),
                   onPressed: onPostingScreen),
             ),
+
+
           ],
         ));
   }

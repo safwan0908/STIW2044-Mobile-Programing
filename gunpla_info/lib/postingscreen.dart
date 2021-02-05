@@ -17,11 +17,11 @@ class _PostingScreenState extends State<PostingScreen> {
   final TextEditingController _eventDescriptioncontroller =
       TextEditingController();
 
-  String _eventName = "";
-  String _eventDate = "";
-  String _eventTime = "";
-  String _eventLocation = "";
-  String _eventDescription = "";
+  String _eventName;
+  String _eventDate;
+  String _eventTime;
+  String _eventLocation;
+  String _eventDescription;
 
   double screenHeight = 0.00, screenWidth = 0.00;
 
@@ -106,33 +106,32 @@ class _PostingScreenState extends State<PostingScreen> {
         type: ProgressDialogType.Normal, isDismissible: false);
     pd.style(message: "Posting");
     await pd.show();
-    http.post("http://jarfp.com/gunplainfo/php/post_event.php", 
-      body: {
-        "eventname" : _eventName,
-        "eventdate" : _eventDate,
-        "eventtime" : _eventTime,
-        "eventlocation" : _eventLocation,
-        "eventdescription" : _eventDescription,
-      }).then((res) {
-        print(res.body);
-        if (res.body == "succes") {
-          Toast.show(
-            "Post Succesful",
-            context,
-            duration: Toast.LENGTH_LONG,
-            gravity: Toast.TOP,
-          );
-        } else {
-          Toast.show(
-            "Post Failed",
-            context,
-            duration: Toast.LENGTH_LONG,
-            gravity: Toast.TOP,
-          );
-        }
-     }).catchError((err) {
+    http.post("http://jarfp.com/gunplainfo/php/post_event.php", body: {
+      "eventname": _eventName,
+      "eventdate": _eventDate,
+      "eventtime": _eventTime,
+      "eventlocation": _eventLocation,
+      "eventdescription": _eventDescription,
+    }).then((res) {
+      print(res.body);
+      if (res.body == "succes") {
+        Toast.show(
+          "Post Succesful",
+          context,
+          duration: Toast.LENGTH_LONG,
+          gravity: Toast.TOP,
+        );
+      } else {
+        Toast.show(
+          "Post Failed",
+          context,
+          duration: Toast.LENGTH_LONG,
+          gravity: Toast.TOP,
+        );
+      }
+    }).catchError((err) {
       print(err);
-      });
+    });
     await pd.hide();
   }
 }
